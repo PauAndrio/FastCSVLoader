@@ -59,6 +59,7 @@ public class SSTableWriter implements AtomsWriter {
             TrajectoryReader tr = new TrajectoryReader(trajFile,' ',atomNum,ssWriter);
             int read = tr.call();
             log.info("Finished inserting {} positions",read);
+            ssWriter.writer.close();
 
         }
 
