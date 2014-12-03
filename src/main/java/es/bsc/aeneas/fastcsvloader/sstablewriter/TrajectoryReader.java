@@ -59,14 +59,8 @@ public class TrajectoryReader implements Callable<Integer> {
         int count = 0;
 
         while(fc0.read()!='\n');
-        boolean continua=true;
         byte c;
-        while (continua) {
-
-            if((c = (byte) fc0.read())!=-1){
-                continua=false;
-                c='\n';
-            }
+        while ((c = (byte) fc0.read())!=-1) {
             /**
              * That's a state machine with 2 states. Word and not word
              */

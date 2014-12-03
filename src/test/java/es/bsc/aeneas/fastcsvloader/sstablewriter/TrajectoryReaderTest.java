@@ -11,7 +11,7 @@ public class TrajectoryReaderTest {
     @Test
 
     public void testCall() throws Exception {
-        TrajectoryReader tr=new TrajectoryReader(new File("/home/ccugnasc/ACGA_last250ns_nowatReimg.trj")
+        TrajectoryReader tr=new TrajectoryReader(new File("/home/pau/testTrajs/ACGA_nowat_10snaps.trj")
                 ,' '
                 ,814,
                 new AtomsWriter() {
