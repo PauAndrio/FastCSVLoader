@@ -102,7 +102,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>es.bsc.aeneas.fastcsvloader.DisruptorImplementation</mainClass>
+                            <mainClass>es.bsc.aeneas.fastcsvloader.sstablewriter.SSTableWriter</mainClass>
                             <packageName>es.bsc.aeneas.fastcsvloader</packageName>
                         </manifest>
                     </archive>
