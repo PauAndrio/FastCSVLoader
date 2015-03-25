@@ -22,7 +22,7 @@ public class TrajectoryReader implements Callable<Integer> {
     private final long filesize;
     private final char FS;
     private final int numberOfAtoms;
-    private BufferedReader fc0;;
+    private BufferedReader fc0;
     private long position = 0;
 
 
@@ -57,10 +57,16 @@ public class TrajectoryReader implements Callable<Integer> {
 
         int frame = 0;
         int count = 0;
-
-        while(fc0.read()!='\n');
         byte c;
-        while ((c = (byte) fc0.read())!=-1) {
+
+        while (fc0.read() != '\n'); //Get rid of the first line
+        boolean cont=true;
+        while (cont) {
+            c = (byte) fc0.read();
+            if(c==-1){
+                c='\n';
+                cont=false;
+            }
             /**
              * That's a state machine with 2 states. Word and not word
              */
@@ -70,17 +76,17 @@ public class TrajectoryReader implements Callable<Integer> {
                     word = false;
                     float num = Float.parseFloat(new String(point, 0, ppos));
                     log.trace("scanned  {}", num);
-                    // position.putFloat(54444);
                     position[xyz++] = num;
                     ppos = 0;
                     count++;
 
                     if (count % 3 == 0) {
                         int atomid = count / 3 - frame * numberOfAtoms;
-                        writer.write(frame, atomid, position[0], position[1], position[2]);
+                        writer.write(frame+1, atomid, position[0], position[1], position[2]);
                         xyz = 0;
                         if (atomid >= numberOfAtoms) {
                             frame++;
+                            while (fc0.read() != '\n'); //Get rid of the box line
                             if(frame%1000==0)
                                 log.info("Written frame number {}",frame);
                         }
