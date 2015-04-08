@@ -82,7 +82,7 @@ public class TrajectoryReader implements Callable<Integer> {
 
                     if (count % 3 == 0) {
                         int atomid = count / 3 - frame * numberOfAtoms;
-                        writer.write(frame+1, atomid, position[0], position[1], position[2]);
+                        writer.write(frame, atomid, position[0], position[1], position[2]);
                         xyz = 0;
                         if (atomid >= numberOfAtoms) {
                             frame++;
